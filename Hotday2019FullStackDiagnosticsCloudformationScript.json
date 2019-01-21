@@ -1,0 +1,231 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Dynatrace Perform 2019: Full Stack Self-Service Diagnostics with Dynatrace",
+
+    "Parameters":{
+        "TenantID":{
+			"Description": "Your Tenant URL in the form https://<TENANTID>.sprint.dynatracelabs.com",
+			"AllowedPattern": "https:\/\/.*\\bsprint.\\bdynatracelabs.\\b\\bcom\\b",
+			"ConstraintDescription": "must be in the format https://<TENANTID>.sprint.dynatracelabs.com",
+            "Type":"String"
+        },
+        "APIToken":{
+			"Description": "Dynatrace API Token",
+            "Type":"String"
+        },
+		"KeyName": {
+            "Description": "Name of Existing EC2 Key Pair which we will use to launch new EC2 Instances",
+            "Type": "AWS::EC2::KeyPair::KeyName",
+            "ConstraintDescription": "Must be the name of an existing Key Pair",
+            "MinLength" : "1",
+            "MaxLength" : "255"
+        }
+    },
+
+    "Mappings": {
+        "RegionMap": {
+            "us-east-1": {
+                "AMI": "ami-0d2505740b82f7948"
+            },
+            "us-east-2": {
+                "AMI": "ami-0cf8cc36b8c81c6de"
+            },
+            "us-west-1": {
+                "AMI": "ami-09c5eca75eed8245a"
+            },
+            "us-west-2": {
+                "AMI": "ami-0f05ad41860678734"
+            },
+            "ca-central-1" : {
+                "AMI" : "ami-0388b9f812caf5c3f"
+            },
+            "eu-central-1" : {
+                "AMI": "ami-080d06f90eb293a27"
+            },
+            "eu-west-1" : {
+                "AMI" : "ami-09c5eca75eed8245a"
+            },
+            "eu-west-2" : {
+                "AMI" : "ami-0f05ad41860678734"
+            },
+            "eu-west-3" : {
+                "AMI" : "ami-0697abcfa8916e673"
+            },
+            "ap-south-1" : {
+                "AMI" : "ami-01187fe59c07cd350"
+            },
+            "ap-northeast-2" : {
+                "AMI" : "ami-096560874cb404a4d"
+            },
+            "ap-southeast-1" : {
+                "AMI" : "ami-0efb24bbbf33a2fd7"
+            },
+            "ap-southeast-2" : {
+                "AMI" : "ami-03932cb7d3a1a69af"
+            },
+            "ap-northeast-1" : {
+                "AMI" : "ami-0fd02119f1653c976"
+            },
+            "sa-east-1" : {
+                "AMI" : "ami-04fb8967affdf73b6"
+            }
+        }
+    },
+
+    "Resources": {
+		"InstanceSecurityGroup" : {
+			"Type" : "AWS::EC2::SecurityGroup",
+			"Properties" : {
+				"GroupName": "DynatracePerform2019",
+				"GroupDescription" : "Allow connections to EasyTravel UI",
+				"SecurityGroupIngress" : [
+					{
+					"IpProtocol" : "tcp",
+					"FromPort" : 80,
+					"ToPort" : 80,
+					"CidrIp" : "0.0.0.0/0"
+				},
+				{
+					"IpProtocol" : "tcp",
+					"FromPort" : 22,
+					"ToPort" : 22,
+					"CidrIp" : "0.0.0.0/0"
+				},
+				{
+					"IpProtocol" : "tcp",
+					"FromPort" : 443,
+					"ToPort" : 443,
+					"CidrIp" : "0.0.0.0/0"
+				},
+				{
+					"IpProtocol" : "tcp",
+					"Description": "EasyTravel UI",
+					"FromPort" : 8079,
+					"ToPort" : 8079,
+					"CidrIp" : "0.0.0.0/0"
+				},
+				{
+					"IpProtocol" : "tcp",
+					"Description": "EasyTravel Configuration UI",
+					"FromPort" : 8094,
+					"ToPort" : 8094,
+					"CidrIp" : "0.0.0.0/0"
+				}
+				]
+			}
+		},
+        "ProductionInstance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": {
+					"Fn::FindInMap": [
+						"RegionMap",
+						{
+							"Ref": "AWS::Region"
+						},
+						"AMI"
+					]
+				},
+                "InstanceType": "t2.medium",
+                "BlockDeviceMappings" : [
+                    {
+                       "DeviceName" : "/dev/sda1",
+                       "Ebs" : { "VolumeSize" : "30" }
+                    }
+                ],     
+                "KeyName":  {
+					"Ref": "KeyName"
+				},
+                "SecurityGroups": [
+					{
+						"Ref": "InstanceSecurityGroup"
+					}
+				],
+                "Tags": [{
+                        "Key": "HotDayClass",
+                        "Value": "SelfServiceDiagnostics"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Ref": "TenantID"
+                        }
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": ["", [
+                            "#!/bin/bash\n",
+                            "sudo su -\n",
+							"apt update \n",
+                            "apt install openjdk-8-jre-headless -y\n",                            
+                            "# go to the opt dir, download & install OneAgent with parameterized TenantID and APIToken\n",
+                            "cd /opt\n",
+                            "wget -O Dynatrace-OneAgent-Linux-latest.sh  \"",
+                            {
+                                "Ref": "TenantID"
+                            },
+                            "/api/v1/deployment/installer/agent/unix/default/latest?Api-Token=",
+                            {
+                                "Ref": "APIToken"
+                            },
+                            "&arch=x86&flavor=default\"\n",
+                            "/bin/sh Dynatrace-OneAgent-Linux-latest.sh APP_LOG_CONTENT_ACCESS=1\n",
+                            "cd /opt\n",
+                            "wget https://dexya6d9gs5s.cloudfront.net/latest/dynatrace-easytravel-linux-x86_64.jar\n",
+                            "java -jar dynatrace-easytravel-linux-x86_64.jar -y\n",
+                            "cd /opt/easytravel-2.0.0-x64/resources\n",
+                            "sed -i 's/apmServerDefault=Classic/apmServerDefault=APM/' easyTravelConfig.properties\n",
+                            "cd /opt/easytravel-2.0.0-x64/weblauncher\n",
+                            "./weblauncher.sh UEM Standard\n"
+                        ]]
+                    }
+                }
+            }
+        }
+      },
+	"Outputs": {
+		"MyStackRegion": {
+			"Value": {
+				"Ref": "AWS::Region"
+			},
+			"Description": "The region where the stack was created."
+		},
+		"EasyTravelUI": {
+			"Value": {
+				"Fn::Join":[
+					"",
+					[
+						"http://",
+						{
+							"Fn::GetAtt": [
+								"ProductionInstance",
+								"PublicDnsName"
+							]
+						},
+						":8079"
+					]
+				]				
+			},
+			"Description": "Endpoint for EasyTravel UI"
+		},
+		"EasyTravelConfigUI":{
+			"Value": {
+				"Fn::Join":[
+					"",
+					[
+						"http://",
+						{
+							"Fn::GetAtt": [
+								"ProductionInstance",
+								"PublicDnsName"
+							]
+						},
+						":8094"
+					]
+				]				
+			},
+			"Description": "Endpoint for EasyTravel Config UI"
+		}
+	}
+}

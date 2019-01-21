@@ -1,0 +1,904 @@
+{
+	"info": {
+		"_postman_id": "27556ead-564d-4432-8712-20df9c867c08",
+		"name": "Hotday 2019",
+		"description": "Config API for Hotday 2019",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Application Settings",
+			"item": [
+				{
+					"name": "Create New EasyTravel Application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2807c042-4bb3-46c2-a34e-a9d8b8e3b3b5",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"AppID\", jsonData.id);",
+									"console.log(jsonData.id);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"EasyTravel\",\r\n  \"realUserMonitoringEnabled\": true,\r\n  \"costControlUserSessionPercentage\": 100,\r\n  \"loadActionKeyPerformanceMetric\": \"VISUALLY_COMPLETE\",\r\n  \"xhrActionKeyPerformanceMetric\": \"ACTION_DURATION\",\r\n  \"loadActionApdexSettings\": {\r\n    \"threshold\": 3,\r\n    \"considerJavaScriptErrors\": true\r\n  },\r\n  \"xhrActionApdexSettings\": {\r\n    \"threshold\": 2.5,\r\n    \"considerJavaScriptErrors\": false\r\n  },\r\n  \"customActionApdexSettings\": {\r\n    \"threshold\": 3,\r\n    \"considerJavaScriptErrors\": true\r\n  },\r\n  \"waterfallSettings\": {\r\n    \"uncompressedResourcesThreshold\": 860,\r\n    \"resourcesThreshold\": 100000,\r\n    \"resourceBrowserCachingThreshold\": 50,\r\n    \"slowFirstPartyResourcesThreshold\": 200000,\r\n    \"slowThirdPartyResourcesThreshold\": 200000,\r\n    \"slowCdnResourcesThreshold\": 200000\r\n  },\r\n  \"monitoringSettings\": {\r\n    \"fetchRequests\": true,\r\n    \"xmlHttpRequest\": true,\r\n    \"javaScriptFrameworkSupport\": {\r\n      \"angular\": false,\r\n      \"dojo\": false,\r\n      \"extJS\": false,\r\n      \"icefaces\": true,\r\n      \"jQuery\": true,\r\n      \"mooTools\": false,\r\n      \"prototype\": true,\r\n      \"activeXObject\": false\r\n    },\r\n    \"contentCapture\": {\r\n      \"resourceTimingSettings\": {\r\n        \"w3cResourceTimings\": true,\r\n        \"nonW3cResourceTimings\": false,\r\n        \"nonW3cResourceTimingsInstrumentationDelay\": 50,\r\n        \"resourceTimingCaptureType\": \"CAPTURE_FULL_DETAILS\",\r\n        \"resourceTimingsDomainLimit\": 10\r\n      },\r\n      \"javaScriptErrors\": true,\r\n      \"timeoutSettings\": {\r\n        \"timedActionSupport\": false,\r\n        \"temporaryActionLimit\": 0,\r\n        \"temporaryActionTotalTimeout\": 100\r\n      },\r\n      \"visuallyCompleteAndSpeedIndex\": true\r\n    },\r\n    \"excludeXhrRegex\": \"\",\r\n    \"injectionMode\": \"JAVASCRIPT_TAG\",\r\n    \"libraryFileLocation\": \"\",\r\n    \"monitoringDataPath\": \"\",\r\n    \"customConfigurationProperties\": \"\",\r\n    \"serverRequestPathId\": \"\",\r\n    \"secureCookieAttribute\": false,\r\n    \"cookiePlacementDomain\": \"\",\r\n    \"cacheControlHeaderOptimizations\": true,\r\n    \"advancedJavaScriptTagSettings\": {\r\n      \"syncBeaconFirefox\": false,\r\n      \"syncBeaconInternetExplorer\": false,\r\n      \"instrumentUnsupportedAjaxFrameworks\": false,\r\n      \"specialCharactersToEscape\": \"\",\r\n      \"maxActionNameLength\": 100,\r\n      \"maxErrorsToCapture\": 10,\r\n      \"additionalEventHandlers\": {\r\n        \"userMouseupEventForClicks\": false,\r\n        \"clickEventHandler\": false,\r\n        \"mouseupEventHandler\": false,\r\n        \"blurEventHandler\": false,\r\n        \"changeEventHandler\": false,\r\n        \"toStringMethod\": false,\r\n        \"maxDomNodesToInstrument\": 5000\r\n      },\r\n      \"eventWrapperSettings\": {\r\n        \"click\": false,\r\n        \"mouseUp\": false,\r\n        \"change\": false,\r\n        \"blur\": false,\r\n        \"touchStart\": false,\r\n        \"touchEnd\": false\r\n      },\r\n      \"globalEventCaptureSettings\": {\r\n        \"mouseUp\": true,\r\n        \"mouseDown\": true,\r\n        \"click\": true,\r\n        \"doubleClick\": true,\r\n        \"keyUp\": true,\r\n        \"keyDown\": true,\r\n        \"scroll\": true,\r\n        \"additionalEventCapturedAsUserInput\": \"\"\r\n      }\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/applications/web/",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"applications",
+								"web",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update EasyTravel Application Detection Rules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2807c042-4bb3-46c2-a34e-a9d8b8e3b3b5",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"applicationIdentifier\": \"{{AppID}}\",\r\n\t\"filterConfig\": {\r\n\t\t\"pattern\": \"ip-\",\r\n\t\t\"applicationMatchType\": \"BEGINS_WITH\",\r\n\t\t\"applicationMatchTarget\": \"DOMAIN\"\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/applicationDetectionRules",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"applicationDetectionRules"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Custom Service Creation",
+			"item": [
+				{
+					"name": "Check Destination - Custom Service Creation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a4a0c2c-c185-451b-9245-ae4dccdb6379",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"CheckDestination\",\r\n  \"enabled\": true,\r\n  \"rules\": [\r\n    {\r\n      \"enabled\": true,\r\n      \"className\": \"com.dynatrace.easytravel.business.webservice.JourneyService\",\r\n      \"methodRules\": [\r\n        {\r\n          \"methodName\": \"checkDestination\",\r\n          \"argumentTypes\": [],\r\n          \"returnType\": \"void\"\r\n        },\r\n        {\r\n          \"methodName\": \"checkDestination\",\r\n          \"argumentTypes\": [\r\n            \"java.lang.String\"\r\n          ],\r\n          \"returnType\": \"boolean\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"queueEntryPoint\": false\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/customServices/java",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"customServices",
+								"java"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Validation - Custom Service Creation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "858f756b-89c7-4a9c-8bee-ba40085e2b88",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Credit Card Validation\",\r\n  \"enabled\": true,\r\n  \"rules\": [\r\n    {\r\n      \"enabled\": true,\r\n      \"className\": \"com.dynatrace.easytravel.ipc.SocketNativeApplication\",\r\n      \"methodRules\": [\r\n        {\r\n          \"methodName\": \"sendAndReceive\",\r\n          \"argumentTypes\": [],\r\n          \"returnType\": \"void\"\r\n        },\r\n        {\r\n          \"methodName\": \"sendAndReceive\",\r\n          \"argumentTypes\": [\r\n            \"java.lang.String\"\r\n          ],\r\n          \"returnType\": \"java.lang.String\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"queueEntryPoint\": false\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/customServices/java",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"customServices",
+								"java"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auto Tagging Rules",
+			"item": [
+				{
+					"name": "Easytravel App Tagging Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93c75e63-b4e4-4315-ba0d-f81a3399afdd",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"EasyTravel\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"EasyTravel\",\r\n  \"rules\": [\r\n    {\r\n      \"type\": \"PROCESS_GROUP\",\r\n      \"enabled\": true,\r\n      \"valueFormat\": \"\",\r\n      \"propagationTypes\": [\r\n        \"PROCESS_GROUP_TO_HOST\",\r\n        \"PROCESS_GROUP_TO_SERVICE\"\r\n      ],\r\n      \"conditions\": [\r\n        {\r\n          \"key\": {\r\n            \"attribute\": \"PROCESS_GROUP_DETECTED_NAME\"\r\n          },\r\n          \"comparisonInfo\": {\r\n            \"type\": \"STRING\",\r\n            \"operator\": \"CONTAINS\",\r\n            \"value\": \"easytravel\",\r\n            \"negate\": false,\r\n            \"caseSensitive\": false\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/autoTags",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"autoTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tag EasyTravel Application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e782a3dc-c011-4faa-a98c-4e06ea63fcef",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202,204]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tags\": [\n\t\"EasyTravel\"\t\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}/api/v1/entity/applications/{{AppID}}",
+							"host": [
+								"{{EnvUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"entity",
+								"applications",
+								"{{AppID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AppTeam Tagging Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3cb608ac-d397-4316-a49a-921e23dcc82c",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"AppTeam\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"AppTeam\",\r\n  \"rules\": [\r\n    {\r\n      \"type\": \"SERVICE\",\r\n      \"enabled\": true,\r\n      \"valueFormat\": \"{ProcessGroup:JavaJarFile/com.dynatrace.easytravel.([^.]++)} {ProcessGroup:JavaJarFile/com.dynatrace.easytravel.[^.]++.([^.]++).jar}\",\r\n      \"propagationTypes\": [\r\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\"\r\n      ],\r\n      \"conditions\": [\r\n        {\r\n          \"key\": {\r\n            \"attribute\": \"SERVICE_TECHNOLOGY\"\r\n          },\r\n          \"comparisonInfo\": {\r\n            \"type\": \"SIMPLE_TECH\",\r\n            \"operator\": \"EQUALS\",\r\n            \"value\": {\r\n              \"type\": \"JAVA\"\r\n            },\r\n            \"negate\": false\r\n          }\r\n        },\r\n        {\r\n          \"key\": {\r\n            \"attribute\": \"PROCESS_GROUP_TAGS\"\r\n          },\r\n          \"comparisonInfo\": {\r\n            \"type\": \"TAG\",\r\n            \"operator\": \"TAG_KEY_EQUALS\",\r\n            \"value\": {\r\n              \"context\": \"CONTEXTLESS\",\r\n              \"key\": \"EasyTravel\"\r\n            },\r\n            \"negate\": false\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/autoTags",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"autoTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Web Server Tagging Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a9f96d43-9710-46d7-b182-8064663d1c1e",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Web Server\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Web Server\",\r\n  \"rules\": [\r\n    {\r\n      \"type\": \"SERVICE\",\r\n      \"enabled\": true,\r\n      \"valueFormat\": null,\r\n      \"propagationTypes\": [\r\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\"\r\n      ],\r\n      \"conditions\": [\r\n        {\r\n          \"key\": {\r\n            \"attribute\": \"SERVICE_TECHNOLOGY\"\r\n          },\r\n          \"comparisonInfo\": {\r\n            \"type\": \"SIMPLE_TECH\",\r\n            \"operator\": \"EQUALS\",\r\n            \"value\": {\r\n              \"type\": \"APACHE_HTTP_SERVER\"\r\n            },\r\n            \"negate\": false\r\n          }\r\n        },\r\n        {\r\n          \"key\": {\r\n            \"attribute\": \"PROCESS_GROUP_TAGS\"\r\n          },\r\n          \"comparisonInfo\": {\r\n            \"type\": \"TAG\",\r\n            \"operator\": \"TAG_KEY_EQUALS\",\r\n            \"value\": {\r\n              \"context\": \"CONTEXTLESS\",\r\n              \"key\": \"EasyTravel\"\r\n            },\r\n            \"negate\": false\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/autoTags",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"autoTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credit Card Auth Tagging Rule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2696d4b8-bca5-4465-955c-882fa25da7cd",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Credit Card Auth\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Credit Card Auth\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"valueFormat\": null,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"PROCESS_GROUP_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        },\n        {\n          \"key\": {\n            \"attribute\": \"PROCESS_GROUP_PREDEFINED_METADATA\",\n            \"dynamicKey\": \"EXE_NAME\",\n            \"type\": \"PROCESS_PREDEFINED_METADATA_KEY\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"STRING\",\n            \"operator\": \"CONTAINS\",\n            \"value\": \"CreditCardAuthorization\",\n            \"negate\": false,\n            \"caseSensitive\": true\n          }\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/autoTags",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"autoTags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Management Zones",
+			"item": [
+				{
+					"name": "EasyTravel Management Zone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d43e369f-2a5e-4ef7-8964-4b0238747072",
+								"exec": [
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"EasyTravel\");",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"EasyTravel\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\",\n        \"SERVICE_TO_HOST_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"SERVICE_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    },\n    {\n      \"type\": \"WEB_APPLICATION\",\n      \"enabled\": true,\n      \"propagationTypes\": [],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"WEB_APPLICATION_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/managementZones",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"managementZones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EasyTravel Frontend Management Zone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0b8c68a-08a2-43f0-807e-8bf1ec6dfc81",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Frontend\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"EasyTravel Frontend\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"SERVICE_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"AppTeam\",\n              \"value\": \"customer frontend\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/managementZones",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"managementZones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EasyTravel Backend Management Zone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b855b72-a84c-4523-8ee0-c3015cc09aa9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Backend\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"EasyTravel Backend\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"SERVICE_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"AppTeam\",\n              \"value\": \"business backend\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/managementZones",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"managementZones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EasyTravel Credit Card Auth Management Zone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b855b72-a84c-4523-8ee0-c3015cc09aa9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Credit\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Credit Card Auth\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"SERVICE_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"Credit Card Auth\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/managementZones",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"managementZones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EasyTravel Infrastructure Management Zone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b855b72-a84c-4523-8ee0-c3015cc09aa9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Infrastructure\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"EasyTravel Infrastructure\",\n  \"rules\": [\n    {\n      \"type\": \"HOST\",\n      \"enabled\": true,\n      \"propagationTypes\": [],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"HOST_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/managementZones",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"managementZones"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request Attributes",
+			"item": [
+				{
+					"name": "EasyTravel Amount Request Attribute",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b855b72-a84c-4523-8ee0-c3015cc09aa9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"easyTravel Amount\",\n  \"enabled\": true,\n  \"dataType\": \"STRING\",\n  \"dataSources\": [\n    {\n      \"enabled\": true,\n      \"source\": \"QUERY_PARAMETER\",\n      \"valueProcessing\": {\n        \"splitAt\": \"\",\n        \"trim\": false\n      },\n      \"parameterName\": \"amount\",\n      \"capturingAndStorageLocation\": \"CAPTURE_AND_STORE_ON_BOTH\"\n    }\n  ],\n  \"normalization\": \"ORIGINAL\",\n  \"aggregation\": \"FIRST\",\n  \"confidential\": false,\n  \"skipPersonalDataMasking\": true\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/requestAttributes",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"requestAttributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EasyTravel Destination Request Attribute",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b855b72-a84c-4523-8ee0-c3015cc09aa9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"easyTravel Destination\",\n  \"enabled\": true,\n  \"dataType\": \"STRING\",\n  \"dataSources\": [\n    {\n      \"enabled\": true,\n      \"source\": \"POST_PARAMETER\",\n      \"valueProcessing\": {\n        \"splitAt\": \"\",\n        \"trim\": false\n      },\n      \"parameterName\": \"iceform:destination\"\n    },\n    {\n      \"enabled\": true,\n      \"source\": \"QUERY_PARAMETER\",\n      \"valueProcessing\": {\n        \"splitAt\": \"\",\n        \"trim\": false\n      },\n      \"parameterName\": \"destination\",\n      \"capturingAndStorageLocation\": \"CAPTURE_AND_STORE_ON_BOTH\"\n    }\n  ],\n  \"normalization\": \"ORIGINAL\",\n  \"aggregation\": \"FIRST\",\n  \"confidential\": false,\n  \"skipPersonalDataMasking\": true\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/requestAttributes",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"requestAttributes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EasyTravel User Request Attribute",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b855b72-a84c-4523-8ee0-c3015cc09aa9",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{Api-Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"easyTravel User\",\n  \"enabled\": true,\n  \"dataType\": \"STRING\",\n  \"dataSources\": [\n    {\n      \"enabled\": true,\n      \"source\": \"POST_PARAMETER\",\n      \"valueProcessing\": {\n        \"splitAt\": \"\",\n        \"trim\": false\n      },\n      \"parameterName\": \"iceform:username\"\n    },\n    {\n      \"enabled\": true,\n      \"source\": \"POST_PARAMETER\",\n      \"valueProcessing\": {\n        \"splitAt\": \"\",\n        \"trim\": false\n      },\n      \"parameterName\": \"userName\"\n    },\n    {\n      \"enabled\": true,\n      \"source\": \"QUERY_PARAMETER\",\n      \"valueProcessing\": {\n        \"splitAt\": \"\",\n        \"trim\": false\n      },\n      \"parameterName\": \"userName\",\n      \"capturingAndStorageLocation\": \"CAPTURE_AND_STORE_ON_BOTH\"\n    }\n  ],\n  \"normalization\": \"ORIGINAL\",\n  \"aggregation\": \"FIRST\",\n  \"confidential\": false,\n  \"skipPersonalDataMasking\": true\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/requestAttributes",
+							"host": [
+								"{{EnvUrl}}{{ConfigAPI}}"
+							],
+							"path": [
+								"requestAttributes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7dfa42fa-1072-440e-9233-2a59cc376a72",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "abdff900-8a8c-4926-a595-98d4c47b0c35",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "8ed46d9d-ed58-49c1-bb70-1475804b3e62",
+			"key": "Api-Token",
+			"value": "Api-Token abcdefjhij1234567890",
+			"type": "string"
+		}
+	]
+}
