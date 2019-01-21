@@ -892,5 +892,13 @@
 				]
 			}
 		}
+	],
+	"variable": [
+		{
+			"id": "0103dcf1-a99b-487a-9bef-6d6eba52f4d1",
+			"key": "ConfigAPI",
+			"value": "/api/config/v1",
+			"type": "string"
+		}
 	]
 }
