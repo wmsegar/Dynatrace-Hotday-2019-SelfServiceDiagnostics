@@ -892,13 +892,5 @@
 				]
 			}
 		}
-	],
-	"variable": [
-		{
-			"id": "8ed46d9d-ed58-49c1-bb70-1475804b3e62",
-			"key": "Api-Token",
-			"value": "Api-Token abcdefjhij1234567890",
-			"type": "string"
-		}
 	]
 }
