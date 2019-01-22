@@ -10,27 +10,23 @@
 			"name": "Application Settings",
 			"item": [
 				{
-					"name": "Create New EasyTravel Application",
+					"name": "Update Default Application Configuration",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "2807c042-4bb3-46c2-a34e-a9d8b8e3b3b5",
+								"id": "7e04d3c3-04a3-4304-8feb-d9daf27aabe0",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"pm.environment.set(\"AppID\", jsonData.id);",
-									"console.log(jsonData.id);",
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									""
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -49,62 +45,75 @@
 							"raw": "{\r\n  \"name\": \"EasyTravel\",\r\n  \"realUserMonitoringEnabled\": true,\r\n  \"costControlUserSessionPercentage\": 100,\r\n  \"loadActionKeyPerformanceMetric\": \"VISUALLY_COMPLETE\",\r\n  \"xhrActionKeyPerformanceMetric\": \"ACTION_DURATION\",\r\n  \"loadActionApdexSettings\": {\r\n    \"threshold\": 3,\r\n    \"considerJavaScriptErrors\": true\r\n  },\r\n  \"xhrActionApdexSettings\": {\r\n    \"threshold\": 2.5,\r\n    \"considerJavaScriptErrors\": false\r\n  },\r\n  \"customActionApdexSettings\": {\r\n    \"threshold\": 3,\r\n    \"considerJavaScriptErrors\": true\r\n  },\r\n  \"waterfallSettings\": {\r\n    \"uncompressedResourcesThreshold\": 860,\r\n    \"resourcesThreshold\": 100000,\r\n    \"resourceBrowserCachingThreshold\": 50,\r\n    \"slowFirstPartyResourcesThreshold\": 200000,\r\n    \"slowThirdPartyResourcesThreshold\": 200000,\r\n    \"slowCdnResourcesThreshold\": 200000\r\n  },\r\n  \"monitoringSettings\": {\r\n    \"fetchRequests\": true,\r\n    \"xmlHttpRequest\": true,\r\n    \"javaScriptFrameworkSupport\": {\r\n      \"angular\": false,\r\n      \"dojo\": false,\r\n      \"extJS\": false,\r\n      \"icefaces\": true,\r\n      \"jQuery\": true,\r\n      \"mooTools\": false,\r\n      \"prototype\": true,\r\n      \"activeXObject\": false\r\n    },\r\n    \"contentCapture\": {\r\n      \"resourceTimingSettings\": {\r\n        \"w3cResourceTimings\": true,\r\n        \"nonW3cResourceTimings\": false,\r\n        \"nonW3cResourceTimingsInstrumentationDelay\": 50,\r\n        \"resourceTimingCaptureType\": \"CAPTURE_FULL_DETAILS\",\r\n        \"resourceTimingsDomainLimit\": 10\r\n      },\r\n      \"javaScriptErrors\": true,\r\n      \"timeoutSettings\": {\r\n        \"timedActionSupport\": false,\r\n        \"temporaryActionLimit\": 0,\r\n        \"temporaryActionTotalTimeout\": 100\r\n      },\r\n      \"visuallyCompleteAndSpeedIndex\": true\r\n    },\r\n    \"excludeXhrRegex\": \"\",\r\n    \"injectionMode\": \"JAVASCRIPT_TAG\",\r\n    \"libraryFileLocation\": \"\",\r\n    \"monitoringDataPath\": \"\",\r\n    \"customConfigurationProperties\": \"\",\r\n    \"serverRequestPathId\": \"\",\r\n    \"secureCookieAttribute\": false,\r\n    \"cookiePlacementDomain\": \"\",\r\n    \"cacheControlHeaderOptimizations\": true,\r\n    \"advancedJavaScriptTagSettings\": {\r\n      \"syncBeaconFirefox\": false,\r\n      \"syncBeaconInternetExplorer\": false,\r\n      \"instrumentUnsupportedAjaxFrameworks\": false,\r\n      \"specialCharactersToEscape\": \"\",\r\n      \"maxActionNameLength\": 100,\r\n      \"maxErrorsToCapture\": 10,\r\n      \"additionalEventHandlers\": {\r\n        \"userMouseupEventForClicks\": false,\r\n        \"clickEventHandler\": false,\r\n        \"mouseupEventHandler\": false,\r\n        \"blurEventHandler\": false,\r\n        \"changeEventHandler\": false,\r\n        \"toStringMethod\": false,\r\n        \"maxDomNodesToInstrument\": 5000\r\n      },\r\n      \"eventWrapperSettings\": {\r\n        \"click\": false,\r\n        \"mouseUp\": false,\r\n        \"change\": false,\r\n        \"blur\": false,\r\n        \"touchStart\": false,\r\n        \"touchEnd\": false\r\n      },\r\n      \"globalEventCaptureSettings\": {\r\n        \"mouseUp\": true,\r\n        \"mouseDown\": true,\r\n        \"click\": true,\r\n        \"doubleClick\": true,\r\n        \"keyUp\": true,\r\n        \"keyDown\": true,\r\n        \"scroll\": true,\r\n        \"additionalEventCapturedAsUserInput\": \"\"\r\n      }\r\n    }\r\n  }\r\n}"
 						},
 						"url": {
-							"raw": "{{EnvUrl}}{{ConfigAPI}}/applications/web/",
+							"raw": "{{EnvUrl}}{{ConfigAPI}}/applications/web/default",
 							"host": [
 								"{{EnvUrl}}{{ConfigAPI}}"
 							],
 							"path": [
 								"applications",
 								"web",
-								""
+								"default"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update EasyTravel Application Detection Rules",
+					"name": "Get Default Application ID",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "2807c042-4bb3-46c2-a34e-a9d8b8e3b3b5",
+								"id": "04574a7b-fba3-4762-afc9-a6126a3a5057",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									""
+									"var jsonData = JSON.parse(responseBody);",
+									"var i;",
+									"for (i=0; i < jsonData.length; i++){",
+									"    if (jsonData[i].applicationType === \"DEFAULT\"){",
+									"        pm.environment.set(\"AppID\", jsonData[i].entityId)",
+									"        console.log(jsonData[i].entityId)",
+									"    }",
+									"}",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"type": "text",
-								"value": "{{Api-Token}}"
+								"value": "{{Api-Token}}",
+								"type": "text"
 							},
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"applicationIdentifier\": \"{{AppID}}\",\r\n\t\"filterConfig\": {\r\n\t\t\"pattern\": \"ip-\",\r\n\t\t\"applicationMatchType\": \"BEGINS_WITH\",\r\n\t\t\"applicationMatchTarget\": \"DOMAIN\"\r\n\t}\r\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "{{EnvUrl}}{{ConfigAPI}}/applicationDetectionRules",
+							"raw": "{{EnvUrl}}/api/v1/entity/applications",
 							"host": [
-								"{{EnvUrl}}{{ConfigAPI}}"
+								"{{EnvUrl}}"
 							],
 							"path": [
-								"applicationDetectionRules"
+								"api",
+								"v1",
+								"entity",
+								"applications"
 							]
 						}
 					},
@@ -508,7 +517,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"EasyTravel\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\",\n        \"SERVICE_TO_HOST_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"SERVICE_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    },\n    {\n      \"type\": \"WEB_APPLICATION\",\n      \"enabled\": true,\n      \"propagationTypes\": [],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"WEB_APPLICATION_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}"
+							"raw": "{\n  \"name\": \"EasyTravel\",\n  \"rules\": [\n    {\n      \"type\": \"SERVICE\",\n      \"enabled\": true,\n      \"propagationTypes\": [\n        \"SERVICE_TO_PROCESS_GROUP_LIKE\",\n        \"SERVICE_TO_HOST_LIKE\"\n      ],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"SERVICE_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    },\n    {\n      \"type\": \"WEB_APPLICATION\",\n      \"enabled\": true,\n      \"propagationTypes\": [],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"WEB_APPLICATION_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    },\n    {\n      \"type\": \"BROWSER_MONITOR\",\n      \"enabled\": true,\n      \"propagationTypes\": [],\n      \"conditions\": [\n        {\n          \"key\": {\n            \"attribute\": \"BROWSER_MONITOR_TAGS\"\n          },\n          \"comparisonInfo\": {\n            \"type\": \"TAG\",\n            \"operator\": \"TAG_KEY_EQUALS\",\n            \"value\": {\n              \"context\": \"CONTEXTLESS\",\n              \"key\": \"EasyTravel\"\n            },\n            \"negate\": false\n          }\n        }\n      ]\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "{{EnvUrl}}{{ConfigAPI}}/managementZones",
@@ -869,6 +878,143 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Synthetic Monitor",
+			"item": [
+				{
+					"name": "Get Public Hostname",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6618ab09-7c62-4ac0-abab-225f47087e7f",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"AppDomain\", jsonData[0].publicHostName);",
+									"console.log(jsonData[0].publicHostName);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{EnvUrl}}{{EnvAPI}}/entity/infrastructure/hosts",
+							"host": [
+								"{{EnvUrl}}{{EnvAPI}}"
+							],
+							"path": [
+								"entity",
+								"infrastructure",
+								"hosts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Synthetic Monitor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d9592db-81de-41ec-801d-23509a8a6619",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"frequencyMin\": 5,\r\n  \"anomalyDetection\": {\r\n    \"outageHandling\": {\r\n      \"globalOutage\": true,\r\n      \"localOutage\": true,\r\n      \"localOutagePolicy\": {\r\n        \"affectedLocations\": 1,\r\n        \"consecutiveRuns\": 3\r\n      }\r\n    },\r\n    \"loadingTimeThresholds\": {\r\n      \"enabled\": false,\r\n      \"thresholds\": []\r\n    }\r\n  },\r\n  \"type\": \"BROWSER\",\r\n  \"name\": \"EasyTravel\",\r\n  \"locations\": [\r\n    \"GEOLOCATION-9999453BE4BDB3CD\",\r\n    \"GEOLOCATION-0DF9A0E1095A5A62\",\r\n    \"GEOLOCATION-388A5AD15726CB6F\"\r\n  ],\r\n  \"enabled\": true,\r\n  \"script\": \"{\\\"type\\\":\\\"availability\\\",\\\"version\\\":\\\"1.0\\\",\\\"configuration\\\":{\\\"device\\\":{\\\"deviceName\\\":\\\"Desktop\\\",\\\"orientation\\\":\\\"landscape\\\"}},\\\"events\\\":[{\\\"type\\\":\\\"navigate\\\",\\\"description\\\":\\\"Loading of \\\\\\\"http://{{AppDomain}}:8079\\\\\\\"\\\",\\\"url\\\":\\\"http://{{AppDomain}}:8079\\\",\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}}]}\",\r\n  \"tags\": [\r\n    \"EasyTravel\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}/api/v1/synthetic/monitors",
+							"host": [
+								"{{EnvUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetic",
+								"monitors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Synthetic Monitor Clickpath",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Api-Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"frequencyMin\": 5,\r\n  \"anomalyDetection\": {\r\n    \"outageHandling\": {\r\n      \"globalOutage\": true,\r\n      \"localOutage\": true,\r\n      \"localOutagePolicy\": {\r\n        \"affectedLocations\": 1,\r\n        \"consecutiveRuns\": 3\r\n      }\r\n    },\r\n    \"loadingTimeThresholds\": {\r\n      \"enabled\": false,\r\n      \"thresholds\": []\r\n    }\r\n  },\r\n  \"type\": \"BROWSER\",\r\n  \"name\": \"EasyTravel\",\r\n  \"locations\": [\r\n    \"GEOLOCATION-9999453BE4BDB3CD\",\r\n    \"GEOLOCATION-0DF9A0E1095A5A62\",\r\n    \"GEOLOCATION-388A5AD15726CB6F\"\r\n  ],\r\n  \"enabled\": true,\r\n  \"script\": \"{\\\"type\\\":\\\"clickpath\\\",\\\"version\\\":\\\"1.0\\\",\\\"configuration\\\":{\\\"device\\\":{\\\"deviceName\\\":\\\"Desktop\\\",\\\"orientation\\\":\\\"landscape\\\"}},\\\"events\\\":[{\\\"type\\\":\\\"navigate\\\",\\\"description\\\":\\\"Loading of \\\\\\\"http://{{AppDomain}}:8079\\\\\\\"\\\",\\\"url\\\":\\\"http://{{AppDomain}}:8079\\\",\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"loginForm:loginLink\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:loginLink\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"a:contains(\\\\\\\"Login\\\\\\\")\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Login\\\\\\\"):eq(4)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceCmdLnk:eq(0)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm div:nth-child(6) a\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"network\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Username\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:username\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"loginForm:username\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[0][4]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:j_idt51 input:nth-child(3)\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"network\\\"}},{\\\"type\\\":\\\"keystrokes\\\",\\\"description\\\":\\\"keystrokes on \\\\\\\"Username\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:username\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"loginForm:username\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[0][4]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:j_idt51 input:nth-child(3)\\\"}]},\\\"textValue\\\":\\\"maria\\\",\\\"masked\\\":false,\\\"simulateBlurEvent\\\":true},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Password\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:password\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"password\\\\\\\"][name=\\\\\\\"loginForm:password\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[0][5]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpSecrt\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:j_idt51 input:nth-child(5)\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"keystrokes\\\",\\\"description\\\":\\\"keystrokes on \\\\\\\"Password\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:password\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"password\\\\\\\"][name=\\\\\\\"loginForm:password\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[0][5]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpSecrt\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:j_idt51 input:nth-child(5)\\\"}]},\\\"textValue\\\":\\\"maria\\\",\\\"masked\\\":false,\\\"simulateBlurEvent\\\":true},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Login\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:loginSubmit\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"submit\\\\\\\"][name=\\\\\\\"loginForm:loginSubmit\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[0][7]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceCmdBtn:eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:j_idt51 input:nth-child(9)\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"network\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Book Now\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"a:contains(\\\\\\\"Book Now\\\\\\\"):eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"If you wish to stay in a hotel that has friendly staff and an inviting ambience that reminds you of home, then head to the Grand Hotel.\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".commonButton:eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#recommendation div div:nth-child(3) div:nth-child(2) a:nth-child(5)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#recommendation div.icePnlPos div.icePnlGrp div.icePnlGrp a.commonButton:eq(1)\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"iceform:bookReviewNext\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:bookReviewNext\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"a:contains(\\\\\\\"Next\\\\\\\")\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"To look for a different journey please press the\\\\\\\"):eq(4)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".commonButton:eq(5)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform div:nth-child(6) a:nth-child(7)\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Credit Card Number\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:creditCardNumber\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"iceform:creditCardNumber\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][5]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt78-1-1 input\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"network\\\"}},{\\\"type\\\":\\\"keystrokes\\\",\\\"description\\\":\\\"keystrokes on \\\\\\\"Credit Card Number\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:creditCardNumber\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"iceform:creditCardNumber\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][5]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt78-1-1 input\\\"}]},\\\"textValue\\\":\\\"6549849885\\\",\\\"masked\\\":false,\\\"simulateBlurEvent\\\":true},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Card Owner's Name\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:creditCardOwner\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"iceform:creditCardOwner\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][6]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt:eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt88 input\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"keystrokes\\\",\\\"description\\\":\\\"keystrokes on \\\\\\\"Card Owner's Name\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:creditCardOwner\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"iceform:creditCardOwner\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][6]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt:eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt88 input\\\"}]},\\\"textValue\\\":\\\"Bob Jones\\\",\\\"masked\\\":false,\\\"simulateBlurEvent\\\":true},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Expiration Date\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:expirationMonth\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"select[name=\\\\\\\"iceform:expirationMonth\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][7]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceSelOneMnu:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt91 select\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"selectOption\\\",\\\"description\\\":\\\"selectOption on \\\\\\\"Expiration Date\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:expirationMonth\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"select[name=\\\\\\\"iceform:expirationMonth\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][7]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceSelOneMnu:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt91 select\\\"}]},\\\"selections\\\":[{\\\"value\\\":\\\"March\\\",\\\"index\\\":3}]},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Expiration Date\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:expirationMonth\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"select[name=\\\\\\\"iceform:expirationMonth\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][7]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceSelOneMnu:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt91 select\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"iceform:expirationYear\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:expirationYear\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"select[name=\\\\\\\"iceform:expirationYear\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][8]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceSelOneMnu:eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt91 select:nth-child(2)\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"selectOption\\\",\\\"description\\\":\\\"selectOption on \\\\\\\"iceform:expirationYear\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:expirationYear\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"select[name=\\\\\\\"iceform:expirationYear\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][8]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceSelOneMnu:eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt91 select:nth-child(2)\\\"}]},\\\"selections\\\":[{\\\"value\\\":\\\"2021\\\",\\\"index\\\":4}]},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"iceform:expirationYear\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:expirationYear\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"select[name=\\\\\\\"iceform:expirationYear\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][8]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(6)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceSelOneMnu:eq(2)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt91 select:nth-child(2)\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"iceform:j_idt73\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt73\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Please ensure expiration date is correct\\\\\\\"):eq(5)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".icePnlGrp:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform div:nth-child(6) div:nth-child(3)\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Verification Number\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:verificationNumber\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"iceform:verificationNumber\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][9]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt:eq(3)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt108 input\\\"}]},\\\"button\\\":0},{\\\"type\\\":\\\"keystrokes\\\",\\\"description\\\":\\\"keystrokes on \\\\\\\"Verification Number\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:verificationNumber\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"text\\\\\\\"][name=\\\\\\\"iceform:verificationNumber\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][9]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceInpTxt:eq(3)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:j_idt108 input\\\"}]},\\\"textValue\\\":\\\"407\\\",\\\"masked\\\":false,\\\"simulateBlurEvent\\\":true},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Next\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:bookPaymentNext\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"submit\\\\\\\"][name=\\\\\\\"iceform:bookPaymentNext\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][10]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceCmdBtn:eq(4)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform div:nth-child(6) input:nth-child(7)\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"Finish\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform\\\\\\\\:bookFinishFinish\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"input[type=\\\\\\\"submit\\\\\\\"][name=\\\\\\\"iceform:bookFinishFinish\\\\\\\"]\\\"},{\\\"type\\\":\\\"dom\\\",\\\"value\\\":\\\"document.forms[1][4]\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceCmdBtn:eq(3)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#iceform div:nth-child(6) input:nth-child(6)\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}},{\\\"type\\\":\\\"click\\\",\\\"description\\\":\\\"click on \\\\\\\"loginForm:logoutLink\\\\\\\"\\\",\\\"target\\\":{\\\"locators\\\":[{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm\\\\\\\\:logoutLink\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"a:contains(\\\\\\\"Logout\\\\\\\")\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"div:contains(\\\\\\\"Logout\\\\\\\"):eq(4)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\".iceOutLnk:eq(1)\\\"},{\\\"type\\\":\\\"css\\\",\\\"value\\\":\\\"#loginForm div:nth-child(7) a\\\"}]},\\\"button\\\":0,\\\"wait\\\":{\\\"waitFor\\\":\\\"page_complete\\\"}}]}\",\r\n  \"tags\": [\r\n    \"EasyTravel\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{EnvUrl}}/api/v1/synthetic/monitors",
+							"host": [
+								"{{EnvUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"synthetic",
+								"monitors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -895,7 +1041,7 @@
 	],
 	"variable": [
 		{
-			"id": "0103dcf1-a99b-487a-9bef-6d6eba52f4d1",
+			"id": "bd623a73-fbfa-4037-b538-c47145c6fd34",
 			"key": "ConfigAPI",
 			"value": "/api/config/v1",
 			"type": "string"
